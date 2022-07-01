@@ -1,0 +1,14 @@
+```{r}
+test <- get(load("~/Data/MVCAA/airsensor/2021/airsensor_mvcaa_202101.rda"))
+```
+
+```{r}
+dir.create("SB_01_2021")
+```
+
+```{r}
+for(i in names(test)){
+  write.csv(test[[i]], paste0("SB_01_2021/", i,".csv"), row.names = FALSE)
+}
+```
+

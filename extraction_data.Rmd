@@ -1,0 +1,36 @@
+
+```{r}
+library(AirSensor)
+```
+
+```{r}
+test <- get(load("~/Data/MVCAA/airsensorList_PM02_03.rda"))
+```
+
+If there is not a folder created yet in which to store the data, create one with this line.
+```{r}
+dir.create("CA_QC_02_2021")
+```
+
+
+```{r}
+names <- names(test)
+
+df = data.frame()
+temp = data.frame()
+#sensor1 = data.frame()
+
+for(i in names(test)) {
+  sensor1 = test[[i]]
+  data1 = sensor1[["data"]]
+  df <- data.frame(data1[["datetime"]])
+  #df <- cbind(df, data1)
+  write.csv(data1, paste0("CA_QC_02_2021/", i, ".csv"), row.names = FALSE)
+
+}
+# Append dataframe 
+```
+
+```{r}
+temp_hum <- read_csv("SB_10_12_2021/data.csv")
+```
