@@ -1,8 +1,11 @@
 
+Import the necesary packages in RStudio.
 ```{r}
 library(AirSensor)
+library(MazamaCoreUtils)
 ```
 
+Load in the "test" file from the necessary airsensorList file. 
 ```{r}
 test <- get(load("~/Data/MVCAA/airsensorList_PM02_03.rda"))
 ```
@@ -12,25 +15,15 @@ If there is not a folder created yet in which to store the data, create one with
 dir.create("CA_QC_02_2021")
 ```
 
-
+Initialize the a dataframe, then extract the necessary data from the "test" object.
 ```{r}
-names <- names(test)
-
 df = data.frame()
-temp = data.frame()
-#sensor1 = data.frame()
 
 for(i in names(test)) {
   sensor1 = test[[i]]
   data1 = sensor1[["data"]]
   df <- data.frame(data1[["datetime"]])
-  #df <- cbind(df, data1)
   write.csv(data1, paste0("CA_QC_02_2021/", i, ".csv"), row.names = FALSE)
-
 }
 # Append dataframe 
-```
-
-```{r}
-temp_hum <- read_csv("SB_10_12_2021/data.csv")
 ```
